@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  api:
+    build: ./platform
+    volumes:
+      - ./app:/code/app
+    ports:
+      - "80:80"
+    environment:
+      PORT: 80
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    command: uvicorn app.main:app --host 0.0.0.0 --reload --port 80
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - db_data:/db/data
+
+volumes:
+  db_data:
+    external: true

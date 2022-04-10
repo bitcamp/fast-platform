@@ -1,0 +1,3 @@
+# Project requirements (install w/ `python -m pip install -r requirements.txt`)
+fastapi
+uvicorn
