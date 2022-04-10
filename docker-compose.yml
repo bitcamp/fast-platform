@@ -12,7 +12,7 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
-    command: uvicorn app.main:app --host 0.0.0.0 --reload --port 80
+    command: uvicorn main:app --host 0.0.0.0 --reload --port 80
 
   db:
     image: postgres
@@ -22,7 +22,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
-      - db_data:/db/data
+      - db_data:/var/lib/postgresql
 
 volumes:
   db_data:
